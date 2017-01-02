@@ -1,4 +1,5 @@
 FROM resin/rpi-raspbian:jessie
+MAINTAINER Blake Blackshear <blakeb@blakeshome.com>
 
 ENV RELEASE=3.5.2
 ENV PYTHON_PIP_VERSION=9.0.1
