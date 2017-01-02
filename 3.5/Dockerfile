@@ -10,18 +10,19 @@ RUN rm /etc/apt/sources.list.d/resin.list && \
     apt-key del 92BF1079
 
 # install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-	build-essential \
-        libbz2-dev \
-        liblzma-dev \
-        libsqlite3-dev \
-        libncurses5-dev \
-        libgdbm-dev \
-        zlib1g-dev \
-        libreadline-dev \
-        libssl-dev \
-        tk-dev \
-        wget
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    	      build-essential \
+            libbz2-dev \
+            liblzma-dev \
+            libsqlite3-dev \
+            libncurses5-dev \
+            libgdbm-dev \
+            zlib1g-dev \
+            libreadline-dev \
+            libssl-dev \
+            tk-dev \
+            wget
 
 # download and build Python
 RUN mkdir python3
