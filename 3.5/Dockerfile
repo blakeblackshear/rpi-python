@@ -33,9 +33,10 @@ RUN cd python3 && \
     cd Python-$RELEASE
 
 RUN cd python3/Python-$RELEASE && \
-    ./configure && \
-    make && \
+    ./configure --enable-loadable-sqlite-extensions --enable-shared && \
+    make -j$(nproc) && \
     make install && \
+    ldconfig && \
     cd / && \
     rm -rf python3
 
@@ -44,5 +45,12 @@ RUN pip3 install --no-cache-dir --upgrade --force-reinstall "pip==$PYTHON_PIP_VE
 # cleanup
 RUN rm -rf ~/.cache/pip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN cd /usr/local/bin \
+  	&& { [ -e easy_install ] || ln -s easy_install-* easy_install; } \
+  	&& ln -s idle3 idle \
+  	&& ln -s pydoc3 pydoc \
+  	&& ln -s python3 python \
+  	&& ln -s python3-config python-config
 
 CMD ["python3"]
